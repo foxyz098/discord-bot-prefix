@@ -1,0 +1,44 @@
+const { ButtonStyle } = require('discord.js');
+const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require('discord.js');
+
+module.exports = {
+  name: 'botao',
+  description: 'Comando com botão e embed',
+  run: async (client, message, args) => {
+    // Criar o botão
+    const button = new ButtonBuilder()
+      .setCustomId('botao1')
+      .setLabel('Clique no Botão')
+      .setStyle(ButtonStyle.Primary);
+
+    // Criar a linha de ação com o botão
+    const row = new ActionRowBuilder().addComponents(button);
+
+    // Criar o embed inicial
+    const initialEmbed = new EmbedBuilder()
+      .setColor('#0099ff')
+      .setTitle('Título do Embed')
+      .setDescription('Descrição do Embed');
+
+    // Enviar o embed e o botão
+    const messageSent = await message.channel.send({ embeds: [initialEmbed], components: [row] });
+
+    // Aguardar o evento de interação com o botão
+    const filter = (interaction) => interaction.customId === 'botao1' && interaction.user.id === message.author.id;
+    const collector = messageSent.createMessageComponentCollector({ filter, time: 15000 });
+
+    collector.on('collect', async (interaction) => {
+      // Responder com uma mensagem
+      await interaction.reply({ content: 'Você clicou no botão!', ephemeral: true });
+
+      // Criar um novo embed quando o botão é clicado
+      const newEmbed = new EmbedBuilder()
+        .setColor('#ff0000')
+        .setTitle('Novo Título do Embed')
+        .setDescription('Novo Embed após clicar no botão');
+
+      // Enviar o novo embed
+      await message.channel.send({ embeds: [newEmbed] });
+    });
+  },
+};

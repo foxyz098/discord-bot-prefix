@@ -1,0 +1,14 @@
+{
+  "config": {
+    "token": "MTExNDYzMjkyNzAyNDc4MzQ3MA.GINioX.frikUZdfy-oCGvXndxkJdjrFWKaCt4JmMWJAmU", 
+    "console": "bot iniciado",
+    "prefix": "p!"
+  },
+  "emojis": {
+    "nao": "<a:erradocash:1108767813860065422>",
+    "sim": "<a:c_confiavel:1108767772672000041>",
+    "info": "<:info:1108795879256752208>",
+    "seta": "<a:Seta:1114898924000530472>",
+    "config": "<:config:1114621261012807720>"
+  }
+}
